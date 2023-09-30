@@ -1,0 +1,198 @@
+.main{
+   height: 100vh;
+   width: 100vw;
+   background-color: white; 
+   display: flex;
+   flex-direction: column;
+   
+}
+.signinform{
+    height: 94%;
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   
+}
+.top {
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    justify-content: space-evenly;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    color:  #2E0052;
+
+}
+.logo img{
+    height: 33px;
+    width: 33px;
+
+}
+.welcometext{
+    display: none;
+}
+.form{
+    border: 3px solid #D9D9D9;
+    padding: 20px;
+    height: 56%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    justify-content: space-around;
+
+}
+.form span{
+    display: none;
+}
+.form h2{
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+   
+}
+.form_signin {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    justify-content: space-evenly;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+.form_signin p{
+    font-size: 13px;
+}
+.terms{
+    margin-top: 2%;
+    font-weight: 400;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+}
+.form_signin input{
+    /* padding: 5px; */
+    padding: 5px 5px 5px 9px;
+    /* width: auto; */
+    border-radius: 6px;
+    border: 2px solid #B6B6B6;
+    outline: none;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    height: 20px;
+}
+.form button{
+    height: 35px;
+    background: #2E0052;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+}
+.register{
+    display: flex;
+    flex-direction: column;
+    height: 35px;
+}
+.register button{
+    height: 100%;
+    background: white;
+    border: 2px solid #BDBDBD;
+    border-radius: 6px;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    
+}
+.spaceline{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.line{
+    width: 30%;
+    height: 0;
+    border: 1px solid #C4C4C4;
+    
+    display: inline-block;
+}
+.newuser{
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    display: inline-block;
+}
+.bottom{
+    height: 6%;
+    background: #2E0052;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+/* media quary for mobile */
+
+@media only screen and (max-width: 480px) {
+    .signinform{
+        justify-content: normal;
+    }
+    .logo{
+        width: 100%;
+        color: white;
+        background: #2E0052;
+        height: 7%;
+        justify-content: flex-start;
+    }
+    .logo img{
+        height: 25px;
+    width: 25px;
+    margin-left: 12px;
+    
+    }
+    .logo h2{
+        color: white;
+    font-size: 17px;
+    font-weight: 500;
+    }
+    .welcometext{
+        display: flex;
+        width: 100%;
+        /* margin-left: 32px; */
+        margin-top: 26px;
+    }
+    .welcometext p{
+        margin-left: 18px;
+        font-weight: 400;
+        font-family: 'Roboto', sans-serif;
+        color: #2E0052;
+        font-size: 25px;
+    }
+    .top{
+        width: 90%;
+        /* justify-content: space-between; */
+        height: 65%;
+    }
+    .form{
+        height: 60%;
+        justify-content: space-between;
+    }
+    .form span{
+        font-size: 16px;
+    font-weight: 300;
+    display: inline-flex;
+    }
+    
+}

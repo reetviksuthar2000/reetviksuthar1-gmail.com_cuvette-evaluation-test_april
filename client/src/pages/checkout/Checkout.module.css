@@ -1,0 +1,468 @@
+.container_checkout {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+.top_checkout {
+  height: 50px;
+  background: #2e0052;
+  display: flex;
+  color: white;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  /* position: sticky; */
+  top: 0;
+}
+.top_successful {
+  display: none;
+}
+.contact {
+  display: flex;
+  align-items: center;
+  width: 10%;
+  justify-content: space-evenly;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+.contact img {
+  height: 17px;
+}
+.sale {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+.auth_checkout {
+  display: flex;
+  align-items: center;
+  width: 10%;
+  justify-content: space-evenly;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+.auth_checkout button {
+  background: none;
+  border: none;
+  color: white;
+}
+.auth_checkout p {
+  border-left: 2px solid white;
+  height: 17px;
+}
+
+.middle_checkout {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100vh;
+  width: 100%;
+}
+.first_checkout {
+  display: flex;
+  /* width: 95%; */
+  justify-content: space-between;
+  align-items: center;
+  padding: 2% 2.7% 0% 3%;
+  /* height: 12.5%; */
+}
+.logo_checkout {
+  display: flex;
+  align-items: flex-end;
+  width: 39%;
+  column-gap: 2%;
+}
+.logo_checkout img {
+  height: 40px;
+  width: 40px;
+}
+.logo_checkout h1 {
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  color: #2e0052;
+}
+.logo_checkout p {
+  margin-left: 7px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+.backbtn {
+  padding: 3% 2.7% 0% 3%;
+  display: flex;
+  flex-direction: column;
+}
+.firstbtn {
+  height: 32px;
+  /* width: 168px; */
+  width: 19%;
+  border: none;
+  /* background: no-repeat; */
+  background: #2e0052;
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}
+.secondbtn {
+  display: none;
+}
+.checkout {
+  display: flex;
+  justify-content: center;
+  height: 44px;
+  /* text-align: end; */
+  align-items: flex-end;
+  column-gap: 11px;
+  margin-top: 65px;
+}
+.checkout p {
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  font-size: 23px;
+  text-decoration: underline;
+}
+
+.overview_checkout {
+  display: flex;
+  padding: 4% 2% 12% 3%;
+  column-gap: 12px;
+}
+.left_checkout {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  /* align-items: flex-end; */
+  padding-top: 10px;
+}
+.address_title {
+  display: flex;
+}
+.first_title,
+.second_title,
+.third_title {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  color: #b52b00;
+  font-size: 17px;
+  width: 60%;
+}
+.add_p,
+.pay_p {
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  color: #797979;
+  font-size: 14px;
+}
+.payment_title {
+  display: flex;
+  margin-top: 21px;
+  border-top: 2px solid #e1e1e1;
+  border-bottom: 2px solid #e1e1e1;
+  padding: 21px 0px 21px 0px;
+  align-items: center;
+}
+
+.review_title {
+  display: flex;
+  padding-top: 24px;
+  border-bottom: 2px solid #e1e1e1;
+  padding: 24px 0px 24px 0;
+}
+.reviewofproduct {
+  display: flex;
+  flex-direction: column;
+  /* height: 236px; */
+  display: flex;
+  /* justify-content: center; */
+  width: 185px;
+  /* margin-top: 21px; */
+  /* padding-top: 15px; */
+  align-items: flex-start;
+  /* column-gap: 10px; */
+  row-gap: 9px;
+}
+/* .reviewofproduct{
+    
+} */
+.reviewofproduct img {
+  height: 75%;
+  width: 100%;
+  border: 2px solid #2e0052;
+  border-radius: 14px;
+}
+.product_name {
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+}
+.product_color,
+.product_availability {
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  color: #797979;
+}
+.product_time {
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+.ordertotal {
+  display: flex;
+  margin-top: 26px;
+  /* padding-top: 20px; */
+  border: 2px solid #e1e1e1;
+  border-radius: 5px;
+  align-items: center;
+  padding: 8px 0px 8px 15px;
+}
+.ordertotal button {
+  height: 33px;
+  width: 17%;
+  border: none;
+  border-radius: 8px;
+  background: #ffd600;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+.ordertotal p {
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  margin-left: 20px;
+}
+.ordertotal span {
+  font-weight: 600;
+  font-family: "Roboto", sans-serif;
+  color: #b52b00;
+}
+.right_checkout {
+  /* padding-top: 10px; */
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+.last_price {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 9px 11px 25px 11px;
+}
+.last_price button {
+  height: 33px;
+  /* width: 17%; */
+  border: none;
+  border-radius: 8px;
+  background: #ffd600;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+.conditions {
+  font-size: 8px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  margin-top: 11px;
+}
+.order_summary {
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.items,
+.delivery {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  color: #797979;
+  row-gap: 5px;
+}
+.paidtotal {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  color: #b52b00;
+  margin-top: 10px;
+}
+.bottom_checkout {
+  height: 85px;
+  background: #2e0052;
+  display: flex;
+  color: white;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.bottom_checkout p {
+  height: 40px;
+  /* font-size: 19px; */
+  display: flex;
+  align-items: center;
+}
+.bottom_buttons{
+    display: none;
+}
+.last_price_mobile{
+    display: none;
+}
+@media only screen and (max-width: 480px) {
+  .top_checkout {
+    display: none;
+  }
+  .top_successful {
+    display: flex;
+    background: #2e0052;
+    padding: 8px;
+    font-weight: 500;
+    align-items: center;
+  }
+  .top_successful img {
+    height: 25px;
+    width: 25px;
+  }
+  .top_successful h1 {
+    font-size: 17px;
+    font-weight: 500;
+    color: white;
+    font-family: "Roboto", sans-serif;
+  }
+  .first_checkout {
+    display: none;
+  }
+
+  .secondbtn {
+    display: flex;
+    height: 32px;
+    /* width: 168px; */
+    width: 32px;
+    border: none;
+    /* background: no-repeat; */
+    background: white;
+    box-shadow: 0px 1px 4px 0px #00000054;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+  .firstbtn {
+    display: none;
+  }
+  .checkout{
+    margin-top: 20px;
+    justify-content: normal;
+  }
+  .checkout p{
+    text-decoration: none;
+    margin-left: 12px;
+  }
+  .overview_checkout{
+    flex-direction: column;
+    padding-left: 5%;
+  }
+  .left_checkout{
+    width: 100%;
+  }
+  .address_title{
+    flex-direction: column;
+  }
+  .payment_title{
+    flex-direction: column;
+    align-items: normal;
+  }
+  .review_title{
+    flex-direction: column;
+    border-bottom: none;
+  }
+  .add_p, .pay_p{
+    margin-top: 12px;
+    margin-left: 19px;
+  }
+  .reviewofproduct{
+    margin-top: 12px;
+    margin-left: 19px;
+  }
+  .third_title{
+    width: 100%;
+  }
+  .ordertotal{
+    display: none;
+  }
+  .bottom_checkout{
+    display: none;
+  }
+  .bottom_buttons{
+    display: flex;
+border-top: 1x solid black;
+/* border: 1px solid #C8C8C8; */
+border-top: 1px solid #C8C8C8;
+height: 45px;
+justify-content: space-between;
+}
+.home_btn{
+    display: flex;
+flex-direction: column;
+align-items: center;
+margin-left: 14px;
+/* height: 16px; */
+
+}
+.cart_btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.logout_btn{
+    display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin-right: 14px;
+}
+
+.cart_btn img{
+    height: 19px;
+}
+.logout_btn img{
+    height: 19px;
+}
+.bottom_buttons p{
+    font-size: 8px;
+    margin-top: 1px;
+}
+.line{
+    height: 7%;
+}
+.img1{
+    margin-top: 7px;
+    height: 19px;
+}
+.last_price{display: none;}
+.last_price_mobile{
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 11px 25px 11px;
+}
+.last_price_mobile button{
+    height: 33px;
+    /* width: 17%; */
+    border: none;
+    border-radius: 8px;
+    background: #ffd600;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    margin-top: 40px;
+}
+.right_checkout{
+    width: 100%;
+   
+}
+}
