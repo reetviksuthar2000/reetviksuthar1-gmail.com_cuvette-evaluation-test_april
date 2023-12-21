@@ -6,6 +6,7 @@ import carticon from "../../assets/icons/cartimg.png";
 import topimg from "../../assets/images/topimg (2).png";
 import star from "../../assets/icons/Star.png";
 import arrow from "../../assets/icons/arrow.png";
+import { addtocart } from "../../apis/product";
 import homebtn from "../../assets/icons/homebtn.png";
 import notlogin from "../../assets/icons/notlogin.png";
 import userbtn from "../../assets/icons/userbtn.png";
@@ -20,6 +21,10 @@ function Details() {
   const [productdetails, setProductDetails] = useState({});
   const [islogin, setIsLogin] = useState(false);
   const [image, setImage] = useState("");
+  const [selectedProductIds, setSelectedProductIds] = useState(() => {
+    const storedIds = localStorage.getItem("selectedProductIds");
+    return storedIds ? JSON.parse(storedIds) : [];
+  });
 
   const selectedimg = (item) =>{
    setImage(item);
@@ -47,19 +52,18 @@ function Details() {
     }
   };
 
-  const addtocart = (id) => {
-    if (islogin) {
-      localStorage.setItem("product_id", id);
-      navigate("/viewcart");
-    }
-    else(navigate('/signin'))
-  };
+  const userId = localStorage.getItem('email');
+  function handle_addtocart (id) {
+    addtocart(userId, id);
+    navigate('/viewcart')
+  } 
 
-  const buynowproduct = (id) => {
-    if (islogin) {
-      localStorage.setItem("product_id", id);
-      navigate("/checkout");
-    } else navigate("/signin");
+
+  function buynowproduct  (productId)  {
+    setSelectedProductIds((prevSelectedIds) => [...prevSelectedIds, productId]);
+    setTimeout(()=> {
+      navigate(`/checkout?productId=${productId}`);
+    },1000)
   };
 
   const handleview = () => {
@@ -74,7 +78,8 @@ function Details() {
 
   useEffect(() => {
     fetchproductdetails();
-  }, [setProductDetails]);
+    localStorage.setItem("selectedProductsIds", JSON.stringify(selectedProductIds))
+  }, [setProductDetails, selectedProductIds]);
 
   if (
     !productdetails ||
@@ -135,12 +140,6 @@ function Details() {
           </button>
           <button className={style4.secondbtn} onClick={() => navigate("/")}>
             <img src={arrow} alt="" />
-          </button>
-          <button
-            onClick={() => buynowproduct(productdetails._id)}
-            className={style4.buynow_btn_mob}
-          >
-            Buy Now
           </button>
         </div>
         <div className={style4.information_details}>
@@ -203,9 +202,11 @@ function Details() {
               </p>
             </div>
             <div className={style4.btns}>
+              {islogin && (
+                <>
               <button
                 className={style4.addtocart_btn}
-                onClick={() => addtocart(productdetails._id)}
+                onClick={() => handle_addtocart(productdetails._id)}
               >
                 Add to Cart
               </button>
@@ -215,6 +216,24 @@ function Details() {
               >
                 Buy Now
               </button>
+              </>
+              )}
+              {!islogin && (
+                <>
+              <button
+                className={style4.addtocart_btn}
+                onClick={() => navigate("/signin")}
+              >
+                Add to Cart
+              </button>
+              <button
+                className={style4.buynow_btn}
+                onClick={() => navigate("/signin")}
+              >
+                Buy Now
+              </button>
+              </>
+              )}
             </div>
           </div>
         </div>

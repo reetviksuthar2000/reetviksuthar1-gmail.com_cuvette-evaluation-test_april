@@ -8,6 +8,7 @@ import homebtn from "../../assets/icons/homebtn.png";
 import userbtn from "../../assets/icons/userbtn.png";
 import notlogin from "../../assets/icons/notlogin.png";
 import cartbtn from "../../assets/icons/cartbtn.png";
+import { deleteProduct } from "../../apis/product";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import line from "../../assets/icons/Line 14.png";
@@ -15,16 +16,23 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function Checkout() {
   const navigate = useNavigate();
-  const [productdetails, setProductDetails] = useState({});
+  const [productdetails, setProductDetails] = useState([]);
   const [islogin, setIsLogin] = useState(false);
 
-  const fetchproductdetails = async () => {
-    const cartproductid = localStorage.getItem("product_id");
+  const [selectedProductIds, setSelectedProductIds] = useState(() => {
+    const storedIds = localStorage.getItem("selectedProductIds");
+    return storedIds ? JSON.parse(storedIds) : [];
+  });
 
+  const fetchproductdetails = async () => {
     try {
-      const reqUrl = `${backendUrl}/products/get-products/${cartproductid}`;
-      const response = await axios.get(reqUrl);
-      setProductDetails(response.data.data);
+      const reqUrl = `${backendUrl}/products/checkout`;
+      const response = await axios.get(reqUrl, {
+        params: {
+          productIds: selectedProductIds,
+        }
+      });
+      setProductDetails(response.data.product);
       let token = localStorage.getItem("token");
       if (!token) {
         setIsLogin(false);
@@ -43,17 +51,25 @@ function Checkout() {
     setIsLogin(false);
   };
 
-  const gotosuccespage = () => {
-    localStorage.removeItem("product_id");
+  const calculateTotal = () => {
+    let total = 0;
+    productdetails.forEach((val) => {
+      total += val.price ;
+    });
+    return total;
+  }
+
+
+  const gotosuccespage = (id) => {
+    deleteProduct(id)
+    localStorage.removeItem("selectedProductIds");
     navigate("/successful");
   };
 
   useEffect(() => {
-    const cartproductid = localStorage.getItem("product_id");
-    if(cartproductid){
-      fetchproductdetails();
-    }
-  }, [setProductDetails]);
+    fetchproductdetails();
+  }, [selectedProductIds]);
+
 
   return (
     <div className={style6.container_checkout}>
@@ -122,22 +138,25 @@ function Checkout() {
             </div>
             <div className={style6.review_title}>
               <p className={style6.third_title}>3. Review items and delivery</p>
-              <div className={style6.reviewofproduct}>
-                <img src={productimg} alt="" />
+              {productdetails?.map((item, i) => {
+                return ( 
+              <div className={style6.reviewofproduct} key={i}>
+                <img src={item.image_url?.[0]} alt="" />
                 <p className={style6.product_name}>
-                  {productdetails.company} WH-CH720N
+                  {item.company} {item.product_name}
                 </p>
-                <p className={style6.product_color}>Clour : Black</p>
+                <p className={style6.product_color}>Clour : {item.color}</p>
                 <p className={style6.product_availability}>In Stock</p>
                 <p className={style6.product_time}>
                   Estimated delivery : Monday — FREE Standard Delivery
                 </p>
               </div>
+              )})}
             </div>
             <div className={style6.ordertotal}>
               <button onClick={() => gotosuccespage()}>Place your order</button>
               <p>
-                <span>Order Total : ₹3545.00</span> <br />
+                <span>Order Total : ₹{calculateTotal() + 45}</span> <br />
                 By placing your order, you agree to Musicart privacy notice and
                 conditions of use.
               </p>
@@ -153,27 +172,27 @@ function Checkout() {
               <hr style={{ color: "#E1E1E1", marginTop: "10px" }} />
               <p className={style6.order_summary}>Order Summary</p>
               <p className={style6.items}>
-                Items : <span>₹3500.00</span>
+                Items : <span>₹{calculateTotal()}</span>
               </p>
               <p className={style6.delivery}>
                 Delivery : <span>₹45.00</span>
               </p>
               <hr style={{ color: "#E1E1E1", marginTop: "10px" }} />
               <p className={style6.paidtotal}>
-                Order Total : <span>₹3545.00</span>
+                Order Total : <span>₹{calculateTotal() + 45}</span>
               </p>
             </div>
             <div className={style6.last_price_mobile}>
               <p className={style6.order_summary}>Order Summary</p>
               <p className={style6.items}>
-                Items : <span>₹3500.00</span>
+                Items : <span>₹{calculateTotal()}</span>
               </p>
               <p className={style6.delivery}>
                 Delivery : <span>₹45.00</span>
               </p>
               <hr style={{ color: "#E1E1E1", marginTop: "10px" }} />
               <p className={style6.paidtotal}>
-                Order Total : <span>₹3545.00</span>
+                Order Total : <span>₹{calculateTotal() + 45}</span>
               </p>
               <button onClick={() => gotosuccespage()}>Place your order</button>
             </div>

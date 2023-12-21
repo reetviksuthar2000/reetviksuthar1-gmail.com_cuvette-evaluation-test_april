@@ -13,8 +13,9 @@ import buybtn from "../../assets/images/buybtn.png";
 import homebtn from "../../assets/icons/homebtn.png";
 import userbtn from "../../assets/icons/userbtn.png";
 import cartbtn from "../../assets/icons/cartbtn.png";
+import { addtocart } from "../../apis/product";
 import line from "../../assets/icons/Line 14.png";
-import notlogin from "../../assets/icons/notlogin.png"
+import notlogin from "../../assets/icons/notlogin.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -27,6 +28,8 @@ function Home() {
   const [type, setTypes] = useState([]);
   const [company, setCompany] = useState([]);
   const [color, setColors] = useState([]);
+  const [price, setPrice] = useState([]);
+  const [sort, setSort] = useState("");
   const [view, setView] = useState("grid");
 
   const handlegridbtn = () => {
@@ -37,6 +40,20 @@ function Home() {
     setView("list");
   };
 
+  const verifyToken = () => {
+      let token = localStorage.getItem("token");
+      if (!token) {
+        setIsLogin(false);
+      } else {
+        setIsLogin(true);
+      }
+  } 
+
+  const userId = localStorage.getItem("email");
+  function handleadd_item(id) {
+    addtocart(userId, id);
+  }
+
   const fetchproduct = async () => {
     try {
       const reqUrl = `${backendUrl}/products/list-products`;
@@ -46,35 +63,15 @@ function Home() {
           type: type,
           company: company,
           color: color,
-          
+          price: price,
+          sort: sort,
         },
       });
-
       setProducts(response.data.products);
-
-      let token = localStorage.getItem("token");
-      if (!token) {
-        setIsLogin(false);
-      } else {
-        setIsLogin(true);
-        // setRecruiter(localStorage.getItem("recruiter"));
-      }
       return response;
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const viewdetails = (id) => {
-    localStorage.setItem("product_id", id);
-    navigate("/details");
-  };
-
-  const addtocart = (id) => {
-    localStorage.setItem("cartproduct_id", id);
-    // const arrayid = [id]
-    // localStorage.setItem("cartproduct_id", JSON.stringify(arrayid));
-  
   };
 
   const handlelogout = () => {
@@ -83,19 +80,17 @@ function Home() {
     setIsLogin(false);
   };
 
-
   const handleview = () => {
-
-    navigate('/viewcart');
-  }
+    navigate("/viewcart");
+  };
 
   useEffect(() => {
+    verifyToken();
     fetchproduct();
-  }, [search, type, company, color]);
+  }, [search, type, company, price, color, sort]);
 
   return (
     <div className={style3.container_home}>
-      
       <div className={style3.top_home}>
         <div className={style3.contact}>
           <img src={contacticon} alt="" />
@@ -117,14 +112,14 @@ function Home() {
         </div>
       </div>
       <div className={style3.mobile_search_home}>
-          <input
-            type="search"
-            name=""
-            id=""
-            placeholder="Search Musicart"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+        <input
+          type="search"
+          name=""
+          id=""
+          placeholder="Search Musicart"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       <div className={style3.middle_home}>
         <div className={style3.first_home}>
           <div className={style3.logo_home}>
@@ -161,130 +156,146 @@ function Home() {
         </div>
         <div className={style3.allfilters_home}>
           <div className={style3.scroll_filter}>
-          <div className={style3.view}>
-            <img
-              src={gridicon}
-              onClick={handlegridbtn}
-              style={{ backgroundColor: view === "grid" ? "black" : "" }}
-              alt=""
-            />
-            <img
-              src={listicon}
-              onClick={handlelistbtn}
-              style={{ backgroundColor: view === "list" ? "black" : "" }}
-              alt=""
-            />
-          </div>
-          <div className={style3.filters}>
-            <select
-              name="Headphone type"
-              id=""
-              onChange={(e) => setTypes(e.target.value)}
-            >
-              <option value="Headphone type" disabled selected hidden>
-                Headphone type
-              </option>
-              <option value="Featured" disabled>
-                Featured
-              </option>
-              <option value="In-Ear">In-ear headphone</option>
-              <option value="On-Ear">On-ear headphone</option>
-              <option value="Over-Ear">Over-ear headphone</option>
-            </select>
-            <select
-              name="Company"
-              id=""
-              onChange={(e) => setCompany(e.target.value)}
-            >
-              <option value="Company" disabled selected hidden>
-                Company
-              </option>
-              <option value="Featured">Featured</option>
-              <option value="JBL">JBL</option>
-              <option value="Sony">Sony</option>
-              <option value="Boat">Boat</option>
-              <option value="Zebronics">Zebronics</option>
-              <option value="Marshall">Marshall</option>
-              <option value="Ptron">Ptron</option>
-            </select>
-            <select
-              name="Colour"
-              id=""
-              onChange={(e) => setColors(e.target.value)}
-            >
-              <option value="Colour" disabled selected hidden>
-                Colour
-              </option>
-              <option value="Featured">Featured</option>
-              <option value="Blue">Blue</option>
-              <option value="Black">Black</option>
-              <option value="White">White</option>
-              <option value="Brown">Brown</option>
-            </select>
-            <select name="Price" id="" >
-              <option value="Price" disabled selected hidden>
-                Price
-              </option>
-              <option value="Featured">Featured</option>
-              <option value="0 - 1000">₹0 - ₹1,000</option>
-              <option value="1000 - 10000">₹1,000 - ₹10,000</option>
-              <option value="10000 - 20000">₹10,000 - ₹20,000</option>
-            </select>
-          </div>
-          <div className={style3.sort}>
-            <select name="Sort by : Featured" id="">
-              <option value="Sort by : Featured" disabled selected hidden>
-                Sort by : Featured
-              </option>
-              <option value="Featured">Featured</option>
-            </select>
-          </div>
+            <div className={style3.view}>
+              <img
+                src={gridicon}
+                onClick={handlegridbtn}
+                style={{ backgroundColor: view === "grid" ? "black" : "" }}
+                alt=""
+              />
+              <img
+                src={listicon}
+                onClick={handlelistbtn}
+                style={{ backgroundColor: view === "list" ? "black" : "" }}
+                alt=""
+              />
+            </div>
+            <div className={style3.filters}>
+              <select
+                name="Headphone type"
+                id=""
+                onChange={(e) => setTypes(e.target.value)}
+              >
+                <option value="Headphone type" disabled selected hidden>
+                  Headphone type
+                </option>
+                <option value="Featured">Featured</option>
+                <option value="In-Ear">In-ear headphone</option>
+                <option value="On-Ear">On-ear headphone</option>
+                <option value="Over-Ear">Over-ear headphone</option>
+              </select>
+              <select
+                name="Company"
+                id=""
+                onChange={(e) => setCompany(e.target.value)}
+              >
+                <option value="Company" disabled selected hidden>
+                  Company
+                </option>
+                <option value="Featured">Featured</option>
+                <option value="JBL">JBL</option>
+                <option value="Sony">Sony</option>
+                <option value="Boat">Boat</option>
+                <option value="Zebronics">Zebronics</option>
+                <option value="Marshall">Marshall</option>
+                <option value="Ptron">Ptron</option>
+              </select>
+              <select
+                name="Colour"
+                id=""
+                onChange={(e) => setColors(e.target.value)}
+              >
+                <option disabled selected hidden>
+                  Colour
+                </option>
+                <option value="color">Featured</option>
+                <option value="Blue">Blue</option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+                <option value="Brown">Brown</option>
+              </select>
+              <select
+                name="Price"
+                id=""
+                onChange={(e) => setPrice(e.target.value)}
+              >
+                <option disabled selected hidden>
+                  Price
+                </option>
+
+                <option value="0-1000">₹0 - ₹1,000</option>
+                <option value="1000-10000">₹1,000 - ₹10,000</option>
+                <option value="10000-20000">₹10,000 - ₹20,000</option>
+              </select>
+            </div>
+            <div className={style3.sort}>
+              <select
+                name="Sort by : Featured"
+                id=""
+                onChange={(e) => setSort(e.target.value)}
+              >
+                <option value="Sort by : Featured" disabled selected hidden>
+                  Sort by : Featured
+                </option>
+                <option value="price">Price: Lowest</option>
+                <option value="-price">Price: Highest</option>
+                <option value="company">Name: (A-Z)</option>
+                <option value="-company">Name: (Z-A)</option>
+              </select>
+            </div>
           </div>
         </div>
-        <hr/>
-        <div className={style3.bottomcontent_home}>
+        <hr />
+        <div
+          className={style3.bottomcontent_home}
+          style={{ display: view === "grid" ? "grid" : "block" }}
+        >
           {view === "grid" ? (
             <Product
-              viewdetails={viewdetails}
               product={product}
               islogin={islogin}
-              addtocart={addtocart}
+              handleadd_item={handleadd_item}
             />
           ) : (
             <Listview
-              viewdetails={viewdetails}
               product={product}
               islogin={islogin}
-              addtocart={addtocart}
+              handleadd_item={handleadd_item}
             />
           )}
-          {/* <Product viewdetails={viewdetails} product={product} islogin = {islogin} addtocart = {addtocart}/> */}
+          
         </div>
         <div className={style3.bottom_home}>
           <p>Musicart | All rights reserved</p>
         </div>
-
       </div>
       <div className={style3.bottom_buttons}>
         <div className={style3.home_btn}>
           <img className={style3.line} src={line} alt="" />
-          <img onClick={()=>navigate('/')} className={style3.img1} src={homebtn} alt="" /> <p>Home</p>
+          <img
+            onClick={() => navigate("/")}
+            className={style3.img1}
+            src={homebtn}
+            alt=""
+          />{" "}
+          <p>Home</p>
         </div>
         <div className={style3.cart_btn}>
-          <img onClick={()=>navigate('/viewcart')} src={cartbtn} alt="" /> <p>Cart</p>
+          <img onClick={() => navigate("/viewcart")} src={cartbtn} alt="" />{" "}
+          <p>Cart</p>
         </div>
         <div className={style3.logout_btn}>
           {islogin && (
             <>
-          <img onClick={handlelogout} src={userbtn} alt="" /> <p>Logout</p>
-          </>
+              <img onClick={handlelogout} src={userbtn} alt="" /> <p>Logout</p>
+            </>
           )}
           {!islogin && (
-             <>
-             <img onClick={()=>navigate('/signin')} src={notlogin} alt="" /> <p>Login</p>
-             </>
+            <>
+              <img onClick={() => navigate("/signin")} src={notlogin} alt="" />{" "}
+              <p>Login</p>
+            </>
           )}
-          
         </div>
       </div>
     </div>

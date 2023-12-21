@@ -6,14 +6,12 @@ const userSchema = new mongoose.Schema({
       require: true,
     },
     price: {
-      type: String,
+      type: Number,
       require: true,
-    //   unique: true,
     },
     color: {
       type: String,
       require: true,
-    //   unique: true,
     },
     type: {
       type: String,

@@ -2,8 +2,14 @@ import React from "react";
 import style3 from "../pages/home/Home.module.css";
 import addtocardbtn from "../assets/icons/addtocardbtn.png";
 import productimg from "../assets/images/productimg.png";
+import { useNavigate } from "react-router-dom";
 
-function Listview({ viewdetails, product, islogin, addtocart}) {
+function Listview({ product, islogin, handleadd_item}) {
+  const navigate = useNavigate();
+  function viewdetails (id){
+    localStorage.setItem("product_id", id);
+    navigate('/detail');
+  }
   return (
     <>
       {product.map((item) => {
@@ -18,7 +24,7 @@ function Listview({ viewdetails, product, islogin, addtocart}) {
               />
 
               {islogin && (
-                <span onClick={() => addtocart(item._id)}>
+                <span onClick={() => handleadd_item(item._id)}>
                   <img src={addtocardbtn} alt="" />
                 </span>
               )}

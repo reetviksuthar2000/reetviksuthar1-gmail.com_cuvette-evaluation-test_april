@@ -30,6 +30,9 @@
     font-family: 'Roboto', sans-serif;
 
 }
+.empty{
+    font-size: 48px;
+}
 .contact img{
     height: 17px;
 }
@@ -158,6 +161,7 @@
     display: flex;
     padding: 4% 2% 12% 3%;
     column-gap: 12px;
+    
 }
 .left_cart{
     display: flex;
@@ -165,6 +169,8 @@
     width: 80%;
     align-items: flex-end;
     padding-top: 10px;
+    border-top: 2px solid #E1E1E1;
+  
 }
 .bottom_cart_mobile{
     display: none;
@@ -172,8 +178,7 @@
 .cart_product_details{
     display: flex;
     width: 100%;
-    border-top: 2px solid #E1E1E1;
-    border-bottom: 2px solid #E1E1E1;
+    
     justify-content: space-between;
 }
 .productimg_Cart{
@@ -268,13 +273,13 @@
 }
 .bottom_pricecart{
     display: flex;
-    justify-content: space-between;
-    /* margin-right: 42px; */
-    /* column-gap: 415px; */
-    width: 70%;
+    justify-content: flex-end;
+    width: 100%;
+    border-top: 2px solid #E1E1E1;
 }
 .left{
        margin-right: 40px;
+       margin-right: 50%;
        font-weight: 500;
     font-family: 'Roboto', sans-serif;
     margin-top: 15px;
@@ -287,7 +292,7 @@
 }
 .line{
     border-left: 2px solid #E1E1E1;
-    height: 323px;
+
 }
 .cart_price_details{
     padding-top: 10px;
@@ -395,6 +400,9 @@
     .firstbtn{
         display: none;
     }
+    .empty{
+        font-size: 35px;
+    }
     .secondbtn{
         display: flex;
         box-shadow: 0px 1px 4px 0px #00000054;
@@ -473,7 +481,7 @@
         display: flex;
         width: 100%;
         background: #DBDBDB;
-        height: 210px;
+        height: 230px;
     }
     .productimg_Cart{
         height: 181px;

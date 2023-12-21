@@ -249,14 +249,10 @@ hr{
     display: none;
 }
 .bottomcontent_home{
-       /* height: 45%; */
-    /* overflow-y: scroll; */
-    display: flex;
-    /* flex-direction: column; */
+    display: grid;
+    grid-template-columns: auto auto auto auto;
     padding: 2% 3.2% 4% 3%;
-    /* column-gap: 10px; */
-    flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .container_product{
     padding: 0% 3.2% 0% 3%;
@@ -271,7 +267,7 @@ hr{
     
     display: flex;
     flex-direction: column;
-    height: 266px;
+    /* height: 266px; */
     padding-bottom: 25px;
 
 }
@@ -321,21 +317,21 @@ hr{
     
 }
 .testtrial{
-    border: 17px solid #D4E5FF;
+    border: 22px solid #D4E5FF;
     /* height: 100%; */
     /* width: 80%; */
-    height: 150px;
+    height: 171px;
 }
 .top_product span{
     position: absolute;
     /* position: relative; */
-    top: 143px;
-    left: 140px;
+    top: 172px;
+    left: 169px;
     background-size: 30px;
     height: 35px;
     background: white;
-    border-radius: 50%;
-    width: 35px;
+    border-radius: 80%;
+    width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -421,20 +417,27 @@ hr{
         height: 30px;
         
     } 
+
+    .bottomcontent_home{
+        display: grid;
+        grid-template-columns: auto auto;
+        padding: 2% 3.2% 4% 3%;
+        justify-content: space-around;
+    }
    
     .component_product{
         margin-bottom: 14px;
     border: 1.13px solid #CECECE;
     border-radius: 4px;
     padding: 0;
-    height: 221px;
+    height: 239px;
     }
     .bottom_product{
         height: 72px;
     }
     .testtrial{
-        height: 112px;
-        border: 15px solid #D4E5FF;
+        height: 135px;
+        border: 19px solid #D4E5FF;
     }
     .product_title{
         margin-left: 10px;
@@ -562,13 +565,13 @@ hr{
         height: 19px;
     }
     .top_product span{
-        top: 112px;
-    left: 109px;
-    width: 25px;
-    height: 24px;
+        top: 129px;
+    left: 131px;
+    width: 36px;
+    height: 36px;
     }
     .top_product span img{
-        height: 14px;
+        height: 20px;
     
     }
 }
